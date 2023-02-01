@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Navbar = ({ props }) => {
@@ -8,10 +9,10 @@ const Navbar = ({ props }) => {
         <img src="/images/logo.svg" alt="logo" />
       </Logo>
       <NavMenu>
-        <a href="/">
+        <Link to='/home'>
           <img src="/images/home-icon.svg" alt="home-icon" />
           <span>Home</span>
-        </a>
+        </Link>
         <a href="/">
           <img src="/images/search-icon.svg" alt="home-icon" />
           <span>Search</span>
