@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import ImgSlider from "../ImgSlider/ImgSlider";
+import Recommends from "../Recommends/Recommends";
 import Viewer from "../View/Viewer";
 
 const Home = ({ props }) => {
@@ -7,6 +8,7 @@ const Home = ({ props }) => {
     <Cointainer>
       <ImgSlider></ImgSlider>
       <Viewer></Viewer>
+      <Recommends></Recommends>
     </Cointainer>
   );
 };
