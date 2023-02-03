@@ -1,30 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-
-const Recommends = (props) => {
+const NewDisney = () => {
   const [recommendsData, SetRecommendsData] = useState();
   useEffect(() => {
-    fetch("DisneyRecommendsData.json")
+    fetch("DisneyPlusData.json")
       .then((res) => res.json())
       .then((data) => SetRecommendsData(data));
   }, []);
-  console.log(recommendsData);
   return (
     <Container>
-      <h1>Recommends for You</h1>
+      <h1>New To Disney+</h1>
       <Content>
         {recommendsData &&
           recommendsData.map((data) => (
-            <Wrap
-            key={data.id}
-            data={data}
-            >  
+            <Wrap key={data.id} data={data}>
               <Link to={`/details/` + data.id}>
-                <img
-                  src={data.cardImg}
-                  alt="viewers-marvel"
-                />
+                <img src={data.cardImg} alt="viewers-marvel" />
               </Link>
             </Wrap>
           ))}
@@ -32,7 +24,6 @@ const Recommends = (props) => {
     </Container>
   );
 };
-
 const Container = styled.div`
   padding: 0 0 26px;
   text-align: start;
@@ -78,4 +69,4 @@ const Wrap = styled.div`
     border-color: rgba(249, 249, 249, 0.8);
   }
 `;
-export default Recommends;
+export default NewDisney;

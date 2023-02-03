@@ -1,18 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-
-const Recommends = (props) => {
+const Trending = () => {
   const [recommendsData, SetRecommendsData] = useState();
   useEffect(() => {
-    fetch("DisneyRecommendsData.json")
+    fetch("DisneyTrendingData.json")
       .then((res) => res.json())
       .then((data) => SetRecommendsData(data));
   }, []);
-  console.log(recommendsData);
-  return (
-    <Container>
-      <h1>Recommends for You</h1>
+    return (
+        <Container>
+      <h1>Trending</h1>
       <Content>
         {recommendsData &&
           recommendsData.map((data) => (
@@ -30,9 +28,8 @@ const Recommends = (props) => {
           ))}
       </Content>
     </Container>
-  );
-};
-
+    );
+}
 const Container = styled.div`
   padding: 0 0 26px;
   text-align: start;
@@ -78,4 +75,4 @@ const Wrap = styled.div`
     border-color: rgba(249, 249, 249, 0.8);
   }
 `;
-export default Recommends;
+export default Trending;
