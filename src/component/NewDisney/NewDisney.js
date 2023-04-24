@@ -4,7 +4,7 @@ import styled from "styled-components";
 const NewDisney = () => {
   const [recommendsData, SetRecommendsData] = useState();
   useEffect(() => {
-    fetch("DisneyPlusData.json")
+    fetch("http://localhost:5000/DisneyPlusData")
       .then((res) => res.json())
       .then((data) => SetRecommendsData(data));
   }, []);
@@ -15,7 +15,7 @@ const NewDisney = () => {
         {recommendsData &&
           recommendsData.map((data) => (
             <Wrap key={data.id} data={data}>
-              <Link to={`/details/` + data.id}>
+              <Link to={`/details/` + data._id}>
                 <img src={data.cardImg} alt="viewers-marvel" />
               </Link>
             </Wrap>

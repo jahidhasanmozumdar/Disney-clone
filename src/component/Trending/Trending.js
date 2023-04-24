@@ -4,7 +4,7 @@ import styled from "styled-components";
 const Trending = () => {
   const [recommendsData, SetRecommendsData] = useState();
   useEffect(() => {
-    fetch("DisneyTrendingData.json")
+    fetch("http://localhost:5000/Trending")
       .then((res) => res.json())
       .then((data) => SetRecommendsData(data));
   }, []);
@@ -18,7 +18,7 @@ const Trending = () => {
             key={data.id}
             data={data}
             >  
-              <Link to={`/details/` + data.id}>
+              <Link to={`/details/` + data._id}>
                 <img
                   src={data.cardImg}
                   alt="viewers-marvel"

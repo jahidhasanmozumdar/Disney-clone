@@ -9,30 +9,30 @@ const Navbar = ({ props }) => {
         <img src="/images/logo.svg" alt="logo" />
       </Logo>
       <NavMenu>
-        <Link to='/home'>
+        <Link to="/home">
           <img src="/images/home-icon.svg" alt="home-icon" />
           <span>Home</span>
         </Link>
-        <a href="/">
+        <Link to="/Search">
           <img src="/images/search-icon.svg" alt="home-icon" />
           <span>Search</span>
-        </a>
-        <a href="/">
+        </Link>
+        <Link to="/watchlist">
           <img src="/images/watchlist-icon.svg" alt="home-icon" />
           <span>Watch-list</span>
-        </a>
-        <a href="/">
+        </Link>
+        <Link to="/original">
           <img src="/images/original-icon.svg" alt="home-icon" />
           <span>Original</span>
-        </a>
-        <a href="/">
+        </Link>
+        <Link to="/movie">
           <img src="/images/movie-icon.svg" alt="home-icon" />
           <span>Movie</span>
-        </a>
-        <a href="/">
+        </Link>
+        <Link to="/Series">
           <img src="/images/series-icon.svg" alt="home-icon" />
           <span>Series</span>
-        </a>
+        </Link>
       </NavMenu>
       <LogIn>Login</LogIn>
     </Nav>
@@ -130,7 +130,7 @@ const LogIn = styled.a`
   border-radius: 4px;
   font-size: 19px;
   transition: all 0.2s ease 0s;
-  &:hover{
+  &:hover {
     background-color: #f9f9f9;
     color: #000;
     border-color: transparent;

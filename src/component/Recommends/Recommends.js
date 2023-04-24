@@ -5,26 +5,20 @@ import styled from "styled-components";
 const Recommends = (props) => {
   const [recommendsData, SetRecommendsData] = useState();
   useEffect(() => {
-    fetch("DisneyRecommendsData.json")
+    fetch("http://localhost:5000/DisneyRecommendsData")
       .then((res) => res.json())
       .then((data) => SetRecommendsData(data));
   }, []);
-  console.log(recommendsData);
   return (
     <Container>
       <h1>Recommends for You</h1>
       <Content>
         {recommendsData &&
-          recommendsData.map((data) => (
-            <Wrap
-            key={data.id}
-            data={data}
-            >  
-              <Link to={`/details/` + data.id}>
-                <img
-                  src={data.cardImg}
-                  alt="viewers-marvel"
-                />
+          recommendsData?.map((data, key) => (
+            <Wrap key={data.id} data={data}>
+              {data.id}
+              <Link to={`/details/${data._id}`}>
+                <img src={data.cardImg} alt={data.title} />
               </Link>
             </Wrap>
           ))}
