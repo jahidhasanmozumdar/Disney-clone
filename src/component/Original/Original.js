@@ -1,22 +1,32 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import Spinner from "../Spinner/Spinner";
 const Original = () => {
-  const [recommendsData, SetRecommendsData] = useState();
+  const [recommendsData, SetRecommendsData] = useState([]);
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
-    fetch("http://localhost:5000/Original")
+    setLoading(true)
+    fetch("http://localhost:5000/allMovie")
       .then((res) => res.json())
-      .then((data) => SetRecommendsData(data));
+      .then((data) => {
+        const original = data?.filter((d) => d.type === 'original');
+        SetRecommendsData(original);
+        setLoading(false)
+      });
   }, []);
   return (
     <div>
       <Container>
         <h1>Original</h1>
+        { loading? (
+          <Spinner></Spinner>
+        ):(
         <Content>
         {recommendsData &&
           recommendsData.map((data) => (
             <Wrap
-            key={data.id}
+            key={data._id}
             data={data}
             >  
               <Link to={`/details/` + data._id}>
@@ -28,6 +38,7 @@ const Original = () => {
             </Wrap>
           ))}
       </Content>
+        )}
       </Container>
     </div>
   );

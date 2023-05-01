@@ -1,28 +1,39 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import Spinner from "../Spinner/Spinner";
 
 const Recommends = (props) => {
-  const [recommendsData, SetRecommendsData] = useState();
+  const [recommendsData, SetRecommendsData] = useState([]);
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
-    fetch("http://localhost:5000/DisneyRecommendsData")
+    setLoading(true);
+    fetch("http://localhost:5000/allMovie")
       .then((res) => res.json())
-      .then((data) => SetRecommendsData(data));
+      .then((data) => {
+        const recommend = data?.filter((d) => d.type === "recommend");
+        SetRecommendsData(recommend);
+        setLoading(false);
+      });
   }, []);
   return (
     <Container>
       <h1>Recommends for You</h1>
-      <Content>
-        {recommendsData &&
-          recommendsData?.map((data, key) => (
-            <Wrap key={data.id} data={data}>
-              {data.id}
-              <Link to={`/details/${data._id}`}>
-                <img src={data.cardImg} alt={data.title} />
-              </Link>
-            </Wrap>
-          ))}
-      </Content>
+      {loading ? (
+        <Spinner></Spinner>
+      ) : (
+        <Content>
+          {recommendsData &&
+            recommendsData?.map((data, key) => (
+              <Wrap key={data._id} data={data}>
+                {data.id}
+                <Link to={`/details/${data._id}`}>
+                  <img src={data.cardImg} alt={data.title} />
+                </Link>
+              </Wrap>
+            ))}
+        </Content>
+      )}
     </Container>
   );
 };

@@ -1,26 +1,38 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import Spinner from "../Spinner/Spinner";
 const NewDisney = () => {
-  const [recommendsData, SetRecommendsData] = useState();
+  const [recommendsData, SetRecommendsData] = useState([]);
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
-    fetch("http://localhost:5000/DisneyPlusData")
+    setLoading(true);
+    fetch("http://localhost:5000/allMovie")
       .then((res) => res.json())
-      .then((data) => SetRecommendsData(data));
+      .then((data) => {
+        const recon = data?.filter((d) => d.type === "new");
+        console.log(recon);
+        SetRecommendsData(recon);
+        setLoading(false);
+      });
   }, []);
   return (
     <Container>
       <h1>New To Disney+</h1>
-      <Content>
-        {recommendsData &&
-          recommendsData.map((data) => (
-            <Wrap key={data.id} data={data}>
-              <Link to={`/details/` + data._id}>
-                <img src={data.cardImg} alt="viewers-marvel" />
-              </Link>
-            </Wrap>
-          ))}
-      </Content>
+      {loading ? (
+        <Spinner />
+      ) : (
+        <Content>
+          {recommendsData &&
+            recommendsData.map((data) => (
+              <Wrap key={data._id} data={data}>
+                <Link to={`/details/` + data._id}>
+                  <img src={data.cardImg} alt="viewers-marvel" />
+                </Link>
+              </Wrap>
+            ))}
+        </Content>
+      )}
     </Container>
   );
 };

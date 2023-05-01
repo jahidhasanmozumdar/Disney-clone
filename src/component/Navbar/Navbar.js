@@ -1,8 +1,10 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-const Navbar = ({ props }) => {
+const Navbar = (props) => {
+  const { setSearch, search } = props;
+  const navigate = useNavigate();
+
   return (
     <Nav>
       <Logo>
@@ -12,10 +14,6 @@ const Navbar = ({ props }) => {
         <Link to="/home">
           <img src="/images/home-icon.svg" alt="home-icon" />
           <span>Home</span>
-        </Link>
-        <Link to="/Search">
-          <img src="/images/search-icon.svg" alt="home-icon" />
-          <span>Search</span>
         </Link>
         <Link to="/watchlist">
           <img src="/images/watchlist-icon.svg" alt="home-icon" />
@@ -33,8 +31,20 @@ const Navbar = ({ props }) => {
           <img src="/images/series-icon.svg" alt="home-icon" />
           <span>Series</span>
         </Link>
+        <SearchBar>
+          <SearchInput
+            type="text"
+            placeholder="Search"
+            onChange={(event) => {
+              setSearch(event.target.value);
+            }}
+          />
+          <SearchButton onClick={() => navigate("/filter")}>
+            Search
+          </SearchButton>
+        </SearchBar>
       </NavMenu>
-      <LogIn>Login</LogIn>
+      <LogIn onClick={() => navigate("/login")}>login</LogIn>
     </Nav>
   );
 };
@@ -135,5 +145,35 @@ const LogIn = styled.a`
     color: #000;
     border-color: transparent;
   }
+`;
+
+const SearchBar = styled.div`
+  display: flex;
+  align-items: center;
+  /* border: 2px solid #e6e6e6;
+  
+  padding: 16px 16px; */
+`;
+
+const SearchInput = styled.input`
+  border: none;
+  outline: none;
+  font-size: 16px;
+  margin-left: 16px;
+  padding: 9px 40px;
+  border-radius: 50px;
+`;
+
+const SearchButton = styled.button`
+  border: none;
+  outline: none;
+  background-color: #0069d9;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 50px;
+  padding: 8px 16px;
+  margin-left: 16px;
+  cursor: pointer;
 `;
 export default Navbar;

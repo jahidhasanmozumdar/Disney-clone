@@ -1,40 +1,35 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import Spinner from "../Spinner/Spinner";
-const Trending = () => {
-  const [recommendsData, SetRecommendsData] = useState([]);
-  const [loading, setLoading] = useState([]);
+const FilterData = ({ search }) => {
+  const [filterData, setFilterData] = useState([]);
   useEffect(() => {
-    setLoading(true);
     fetch("http://localhost:5000/allMovie")
       .then((res) => res.json())
       .then((data) => {
-        const trend = data?.filter((d) => d.type === "trending");
-        SetRecommendsData(trend);
-        setLoading(false);
+        const searchData = data?.filter((d) =>
+          d?.title.toLowerCase().includes(search.toLowerCase())
+        );
+        setFilterData(searchData);
       });
-  }, []);
+  }, [search]);
   return (
     <Container>
-      <h1>Trending</h1>
-      {loading ? (
-        <Spinner></Spinner>
-      ) : (
-        <Content>
-          {recommendsData &&
-            recommendsData.map((data) => (
-              <Wrap key={data._id} data={data}>
-                <Link to={`/details/` + data._id}>
-                  <img src={data.cardImg} alt="viewers-marvel" />
-                </Link>
-              </Wrap>
-            ))}
-        </Content>
-      )}
+      <h1>New To Disney+</h1>
+      <Content>
+        {filterData &&
+          filterData.map((data) => (
+            <Wrap key={data._id} data={data}>
+              <Link to={`/details/` + data._id}>
+                <img src={data.cardImg} alt="viewers-marvel" />
+              </Link>
+            </Wrap>
+          ))}
+      </Content>
     </Container>
   );
 };
+
 const Container = styled.div`
   padding: 0 0 26px;
   text-align: start;
@@ -80,4 +75,5 @@ const Wrap = styled.div`
     border-color: rgba(249, 249, 249, 0.8);
   }
 `;
-export default Trending;
+
+export default FilterData;

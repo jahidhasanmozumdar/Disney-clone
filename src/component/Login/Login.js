@@ -1,7 +1,9 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const Login = () => {
+  const navigate = useNavigate()
   return (
     <Container>
       <Content>
@@ -10,7 +12,7 @@ const Login = () => {
             src="/images/rtaImage-removebg-previe22w.png"
             alt="logo"
           />
-          <SingUp>Get All There</SingUp>
+          <SingUp onClick={() => navigate('/home')}>Get All There</SingUp>
           <Description>
             {" "}
             Get Premier Access to Raya and the Last Dragon for an additional fee
