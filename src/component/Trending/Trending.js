@@ -7,7 +7,7 @@ const Trending = () => {
   const [loading, setLoading] = useState([]);
   useEffect(() => {
     setLoading(true);
-    fetch("http://localhost:5000/allMovie")
+    fetch("https://disneyplus-server.onrender.com/allMovie")
       .then((res) => res.json())
       .then((data) => {
         const trend = data?.filter((d) => d.type === "trending");

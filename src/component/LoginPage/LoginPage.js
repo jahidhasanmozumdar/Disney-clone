@@ -56,7 +56,7 @@ const LoginPage = () => (
       <Input type='text' placeholder={'Password'}/>
       </InputContainer>
       <ButtonContainer>
-        <Button>Log in</Button>
+        <Button>Login</Button>
       </ButtonContainer>
     </LoginForm>
   </LoginContainer>

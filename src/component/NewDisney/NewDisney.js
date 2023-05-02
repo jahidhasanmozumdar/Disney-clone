@@ -7,7 +7,7 @@ const NewDisney = () => {
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     setLoading(true);
-    fetch("http://localhost:5000/allMovie")
+    fetch("https://disneyplus-server.onrender.com/allMovie")
       .then((res) => res.json())
       .then((data) => {
         const recon = data?.filter((d) => d.type === "new");

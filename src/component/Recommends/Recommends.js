@@ -8,7 +8,7 @@ const Recommends = (props) => {
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     setLoading(true);
-    fetch("http://localhost:5000/allMovie")
+    fetch("https://disneyplus-server.onrender.com/allMovie")
       .then((res) => res.json())
       .then((data) => {
         const recommend = data?.filter((d) => d.type === "recommend");
