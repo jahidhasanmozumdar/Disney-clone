@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const Login = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
     <Container>
       <Content>

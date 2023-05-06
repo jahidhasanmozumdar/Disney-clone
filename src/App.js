@@ -7,6 +7,7 @@ import Series from "./component/Series/Series";
 import Details from "./component/Details/Details";
 import FilterData from "./component/FilterData/FilterData";
 import LoginPage from "./component/LoginPage/LoginPage";
+import SingUpPage from "./component/SignUpPage/SignUpPage";
 import { useState } from "react";
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
         { path: "/Series", element: <Series></Series> },
         { path: "/filter", element: <FilterData search={search}></FilterData> },
         { path: "/login", element: <LoginPage></LoginPage> },
+        { path: "/sing", element: <SingUpPage></SingUpPage> },
       ],
     },
   ]);

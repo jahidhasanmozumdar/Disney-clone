@@ -1,0 +1,46 @@
+[debug] [2023-05-02T10:46:05.281Z] ----------------------------------------------------------------------
+[debug] [2023-05-02T10:46:05.282Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Jahid\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2023-05-02T10:46:05.283Z] CLI Version:   11.29.1
+[debug] [2023-05-02T10:46:05.283Z] Platform:      win32
+[debug] [2023-05-02T10:46:05.283Z] Node Version:  v18.2.0
+[debug] [2023-05-02T10:46:05.284Z] Time:          Tue May 02 2023 16:46:05 GMT+0600 (Bangladesh Standard Time)
+[debug] [2023-05-02T10:46:05.284Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-05-02T10:46:05.334Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-05-02T10:46:05.335Z] > authorizing via signed-in user (jahidhasanmozumdar9@gmail.com)
+[debug] [2023-05-02T10:46:05.335Z] [iam] checking project disney-plus-542c3 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2023-05-02T10:46:05.337Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/disney-plus-542c3:testIamPermissions [none]
+[debug] [2023-05-02T10:46:05.337Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/disney-plus-542c3:testIamPermissions x-goog-quota-user=projects/disney-plus-542c3
+[debug] [2023-05-02T10:46:05.337Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/disney-plus-542c3:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-05-02T10:46:16.499Z] [iam] error while checking permissions, command may fail: FirebaseError: Failed to make request to https://cloudresourcemanager.googleapis.com/v1/projects/disney-plus-542c3:testIamPermissions
+[debug] [2023-05-02T10:46:16.502Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/disney-plus-542c3 [none]
+[debug] [2023-05-02T10:46:37.550Z] Failed to make request to https://firebase.googleapis.com/v1beta1/projects/disney-plus-542c3
+[debug] [2023-05-02T10:46:42.571Z] Error: Timed out.
+    at Timeout._onTimeout (C:\Users\Jahid\AppData\Roaming\npm\node_modules\firebase-tools\lib\utils.js:253:49)
+    at listOnTimeout (node:internal/timers:564:17)
+    at process.processTimers (node:internal/timers:507:7)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-05-02T10:47:21.330Z] ----------------------------------------------------------------------
+[debug] [2023-05-02T10:47:21.331Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Jahid\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2023-05-02T10:47:21.332Z] CLI Version:   11.29.1
+[debug] [2023-05-02T10:47:21.332Z] Platform:      win32
+[debug] [2023-05-02T10:47:21.332Z] Node Version:  v18.2.0
+[debug] [2023-05-02T10:47:21.333Z] Time:          Tue May 02 2023 16:47:21 GMT+0600 (Bangladesh Standard Time)
+[debug] [2023-05-02T10:47:21.333Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-05-02T10:47:21.391Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-05-02T10:47:21.391Z] > authorizing via signed-in user (jahidhasanmozumdar9@gmail.com)
+[debug] [2023-05-02T10:47:21.391Z] [iam] checking project disney-plus-542c3 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2023-05-02T10:47:21.392Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/disney-plus-542c3:testIamPermissions [none]
+[debug] [2023-05-02T10:47:21.393Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/disney-plus-542c3:testIamPermissions x-goog-quota-user=projects/disney-plus-542c3
+[debug] [2023-05-02T10:47:21.393Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/disney-plus-542c3:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-05-02T10:47:32.545Z] [iam] error while checking permissions, command may fail: FirebaseError: Failed to make request to https://cloudresourcemanager.googleapis.com/v1/projects/disney-plus-542c3:testIamPermissions
+[debug] [2023-05-02T10:47:32.546Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/disney-plus-542c3 [none]
+[debug] [2023-05-02T10:47:53.604Z] Failed to make request to https://firebase.googleapis.com/v1beta1/projects/disney-plus-542c3
+[debug] [2023-05-02T10:47:58.615Z] Error: Timed out.
+    at Timeout._onTimeout (C:\Users\Jahid\AppData\Roaming\npm\node_modules\firebase-tools\lib\utils.js:253:49)
+    at listOnTimeout (node:internal/timers:564:17)
+    at process.processTimers (node:internal/timers:507:7)
+[error] 
+[error] Error: An unexpected error has occurred.
