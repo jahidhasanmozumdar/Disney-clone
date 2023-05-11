@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
 import Input from "./Input";
 import Button from "./Button";
 import Buttons from "./SingUpButton";
 import Icon from "./Icon";
+import { auth } from "../../firebase";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import app from "../../Hook/firebaseConfig";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const LoginContainer = styled.div`
   height: 100vh;
@@ -23,7 +28,7 @@ const LoginForm = styled.form`
   display: flex;
   align-items: center;
   flex-direction: column;
-  height: 80vh;
+  height: 90vh;
   width: 30vw;
   text-transform: uppercase;
   letter-spacing: 0.4rem;
@@ -73,8 +78,9 @@ const InputContainer = styled.div`
   align-items: center;
   height: 20%;
   width: 100%;
+  gap: 20px;
 `;
-
+const From = styled.form``;
 const ButtonContainer = styled.div`
   margin: 1rem 0 2rem 0;
   width: 100%;
@@ -86,6 +92,13 @@ const ButtonContainer = styled.div`
 
 const LoginWith = styled.h5`
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
+
+  span {
+    margin-bottom: 10px;
+    color: red;
+  }
 `;
 
 const HorizontalRule = styled.hr`
@@ -109,25 +122,100 @@ const IconsContainer = styled.div`
 const ForgotPassword = styled.h4`
   cursor: pointer;
 `;
-
+const ButtonLogin = styled.button`
+  background: linear-gradient(to right, #14163c 0%, #03217b 79%);
+  text-transform: uppercase;
+  letter-spacing: 0.2rem;
+  width: 65%;
+  height: 3rem;
+  border: none;
+  color: white;
+  border-radius: 2rem;
+  cursor: pointer;
+`;
+const StyledInput = styled.input`
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  border-radius: 2rem;
+  width: 80%;
+  height: 3rem;
+  padding: 1rem;
+  border: none;
+  outline: none;
+  color: #3c354e;
+  font-size: 1rem;
+  font-weight: bold;
+  &:focus {
+    display: inline-block;
+    box-shadow: 0 0 0 0.2rem #b9abe0;
+    backdrop-filter: blur(12rem);
+    border-radius: 2rem;
+  }
+  &::placeholder {
+    color: #b9abe099;
+    font-weight: 100;
+    font-size: 1rem;
+  }
+`;
 const FacebookBackground =
   "linear-gradient(to right, #0546A0 0%, #0546A0 40%, #663FB6 100%)";
 const InstagramBackground =
   "linear-gradient(to right, #A12AC4 0%, #ED586C 40%, #F0A853 100%)";
 const TwitterBackground = "linear-gradient(to right, #56C1E1 0%, #35A9CE 50%)";
 const LoginPage = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const auth = getAuth(app);
+  const navigate = useNavigate();
+
+  const handleEmail = (e) => {
+    setEmail(e.preventDefault.value);
+  };
+  const handlePassword = (e) => {
+    setPassword(e.preventDefault.value);
+  };
+  const handleEvent = (e) => {
+    e.preventDefault();
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log(user);
+        Swal.fire("login succuss");
+        navigate('/home')
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        alert(errorMessage);
+      });
+  };
+  
   return (
     <LoginContainer>
       <LoginForm>
         <WelcomeText>Welcome</WelcomeText>
         <InputContainer>
-          <Input type="text" placeholder={"Email"} />
-          <Input type="text" placeholder={"Password"} />
+          <From onSubmit={handleEvent}>
+            <StyledInput
+              onClick={handleEmail}
+              type="text"
+              placeholder={"Email"}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <StyledInput
+              onClick={handlePassword}
+              type="text"
+              placeholder={"Password"}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </From>
         </InputContainer>
         <ButtonContainer>
-          <Button>Login</Button>
+          <ButtonLogin onClick={handleEvent}>Login</ButtonLogin>
         </ButtonContainer>
-        <LoginWith>OR LOGIN WITH</LoginWith>
+        <LoginWith>
+          <span>Wrong email or Password</span>
+          OR LOGIN WITH
+        </LoginWith>
         <HorizontalRule />
         <IconsContainer>
           <Icon color={FacebookBackground}>
