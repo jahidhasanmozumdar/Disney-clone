@@ -2,8 +2,13 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Input from "../LoginPage/Input";
 import LogButton from "./Button";
-import{getAuth, createUserWithEmailAndPassword, updateProfile, sendEmailVerification} from 'firebase/auth';
-import app from './../../Hook/firebaseConfig'
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  updateProfile,
+  sendEmailVerification,
+} from "firebase/auth";
+import app from "./../../Hook/firebaseConfig";
 const LoginContainer = styled.div`
   height: 100vh;
   background-image: url("https://www.tetratech.com/en/images/cybersecurity-transformation-pd20-018-960.jpg?blobheader=image/jpeg");
@@ -133,12 +138,12 @@ const ButtonsSing = styled.button`
   cursor: pointer;
 `;
 
-const SingUpPage = () => {
+const SingUpPage = ({ user, setUser }) => {
   const [name, setName] = useState();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const auth = getAuth(app)
+  const auth = getAuth(app);
   const handleName = (e) => {
     console.log(e.target.value);
     setName(e.target.value);
@@ -155,43 +160,37 @@ const SingUpPage = () => {
     console.log(e.target.value);
     setPassword(e.target.value);
   };
-  const handleRegister = (e) =>{
+  const handleRegister = (e) => {
     e.preventDefault();
-    if(name,email,password){
-      createUserWithEmailAndPassword(auth,email,password)
-      .then((userCredential)=>{
-        const user = userCredential.user;
-        updateName();
-        verify();
-        console.log(user)
-      })
-      .catch((error) =>{
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        alert(errorMessage)
-      });
-    }else{
-      alert('Fill up the box')
-      return
+    if ((name, email, password)) {
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          const userInfo = userCredential.user;
+          setUser(userInfo);
+          updateName();
+          verify();
+          console.log(userInfo);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          alert(errorMessage);
+        });
+    } else {
+      alert("Fill up the box");
+      return;
     }
   };
-  const updateName = () =>{
-    updateProfile(auth.currentUser,{
+  const updateName = () => {
+    updateProfile(auth.currentUser, {
       displayName: name,
     })
-    .then(()=>{
-
-    })
-    .catch(()=>{
-
-    })
+      .then(() => {})
+      .catch(() => {});
   };
-  const verify = () =>{
-    sendEmailVerification(auth.currentUser)
-    .then(() =>{
-      
-    })
-  }
+  const verify = () => {
+    sendEmailVerification(auth.currentUser).then(() => {});
+  };
   return (
     <LoginContainer>
       <LoginForm>

@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
-import Input from "./Input";
-import Button from "./Button";
 import Buttons from "./SingUpButton";
 import Icon from "./Icon";
 import { auth } from "../../firebase";
@@ -162,7 +160,7 @@ const FacebookBackground =
 const InstagramBackground =
   "linear-gradient(to right, #A12AC4 0%, #ED586C 40%, #F0A853 100%)";
 const TwitterBackground = "linear-gradient(to right, #56C1E1 0%, #35A9CE 50%)";
-const LoginPage = () => {
+const LoginPage = ({ user, setUser }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const auth = getAuth(app);
@@ -178,17 +176,18 @@ const LoginPage = () => {
     e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        const user = userCredential.user;
-        console.log(user);
+        const userInfo = userCredential.user;
+        console.log(userInfo);
+        setUser(userInfo);
         Swal.fire("login succuss");
-        navigate('/home')
+        navigate("/home");
       })
       .catch((error) => {
         const errorMessage = error.message;
         alert(errorMessage);
       });
   };
-  
+
   return (
     <LoginContainer>
       <LoginForm>

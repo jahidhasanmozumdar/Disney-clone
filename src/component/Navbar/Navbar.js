@@ -1,10 +1,12 @@
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const Navbar = (props) => {
-  const { setSearch, search } = props;
+  const { setSearch, search, user, setUser } = props;
+  const [open, setOpen] = useState(false);
   const navigate = useNavigate();
-
+  console.log(user);
   return (
     <Nav>
       <Logo>
@@ -44,7 +46,16 @@ const Navbar = (props) => {
           </SearchButton>
         </SearchBar>
       </NavMenu>
-      <LogIn onClick={() => navigate("/login")}>login</LogIn>
+      {user ? (
+        <Profile>
+          <NameButton onClick={(e) => setOpen(!open)}>
+            {user.displayName.slice(0,2).toUpperCase()}
+          </NameButton>
+          {open && <LogoutButton>Logout</LogoutButton>}
+        </Profile>
+      ) : (
+        <LogIn onClick={() => navigate("/login")}>login</LogIn>
+      )}
     </Nav>
   );
 };
@@ -175,5 +186,41 @@ const SearchButton = styled.button`
   padding: 8px 16px;
   margin-left: 16px;
   cursor: pointer;
+`;
+const Profile = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: end;
+  /* width: 100%;
+  height: 100%; */
+  border:none;
+`;
+const NameButton = styled.button`
+  font-size: 15px;
+  font-weight: bold;
+  letter-spacing: normal;
+  background-color: orange;
+  padding: 16px 15px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  
+`;
+const LogoutButton = styled.button`
+  border: none;
+  outline: none;
+  background-color: #0069d9;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 50px;
+  padding: 8px 16px;
+  margin-left: 16px;
+  cursor: pointer;
+  position: absolute;
+  right: 90px;
+  border: none;
 `;
 export default Navbar;

@@ -12,11 +12,12 @@ import { useState } from "react";
 
 function App() {
   const [search, setSearch] = useState("");
+  const [user, setUser] = useState("");
 
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Main setSearch={setSearch} search={search}></Main>,
+      element: <Main setSearch={setSearch} search={search} user={user} setUser={setUser}></Main>,
       children: [
         { path: "/", element: <Login></Login> },
         {
@@ -26,8 +27,14 @@ function App() {
         { path: "/details/:id", element: <Details></Details> },
         { path: "/Series", element: <Series></Series> },
         { path: "/filter", element: <FilterData search={search}></FilterData> },
-        { path: "/login", element: <LoginPage></LoginPage> },
-        { path: "/sing", element: <SingUpPage></SingUpPage> },
+        {
+          path: "/login",
+          element: <LoginPage user={user} setUser={setUser}></LoginPage>,
+        },
+        {
+          path: "/sing",
+          element: <SingUpPage user={user} setUser={setUser}></SingUpPage>,
+        },
       ],
     },
   ]);
