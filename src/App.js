@@ -9,15 +9,16 @@ import FilterData from "./component/FilterData/FilterData";
 import LoginPage from "./component/LoginPage/LoginPage";
 import SingUpPage from "./component/SignUpPage/SignUpPage";
 import { useState } from "react";
+import NotFoundPage from "./component/Error/Error";
+import ComingSoonPage from "./component/ComingSoon/CommingSoon";
 
 function App() {
   const [search, setSearch] = useState("");
-  const [user, setUser] = useState("");
 
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Main setSearch={setSearch} search={search} user={user} setUser={setUser}></Main>,
+      element: <Main setSearch={setSearch} search={search}></Main>,
       children: [
         { path: "/", element: <Login></Login> },
         {
@@ -25,17 +26,25 @@ function App() {
           element: <Home></Home>,
         },
         { path: "/details/:id", element: <Details></Details> },
-        { path: "/Series", element: <Series></Series> },
         { path: "/filter", element: <FilterData search={search}></FilterData> },
+        { path: "/Series", element: <ComingSoonPage></ComingSoonPage> },
+        { path: "/original", element: <ComingSoonPage></ComingSoonPage> },
+        { path: "/movie", element: <ComingSoonPage></ComingSoonPage> },
+        { path: "/watchlist", element: <ComingSoonPage></ComingSoonPage> },
         {
           path: "/login",
-          element: <LoginPage user={user} setUser={setUser}></LoginPage>,
+          element: <LoginPage></LoginPage>,
         },
         {
           path: "/sing",
-          element: <SingUpPage user={user} setUser={setUser}></SingUpPage>,
+          element: <SingUpPage></SingUpPage>,
         },
+        
       ],
+    },
+    {
+      path: "*",
+      element: <NotFoundPage></NotFoundPage>,
     },
   ]);
   return (

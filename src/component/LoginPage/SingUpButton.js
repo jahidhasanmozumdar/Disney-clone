@@ -15,5 +15,6 @@ const SignButton = styled.button`
   color: white;
   border-radius: 2rem;
   cursor: pointer;
+  margin:10px 0;
   
 `;

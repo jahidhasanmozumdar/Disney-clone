@@ -78,14 +78,15 @@ const InputContainer = styled.div`
   width: 100%;
   gap: 20px;
 `;
-const From = styled.form``;
+const From = styled.div``;
 const ButtonContainer = styled.div`
-  margin: 1rem 0 2rem 0;
+  /* margin: 1rem 0 2rem 0; */
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-top: 8px;
 `;
 
 const LoginWith = styled.h5`
@@ -106,14 +107,14 @@ const HorizontalRule = styled.hr`
   border: none;
   background: linear-gradient(to right, #14163c 0%, #03217b 79%);
   background-color: #ebd0d0;
-  margin: 1.5rem 0 1rem 0;
+  margin-top: 8px;
   backdrop-filter: blur(25px);
 `;
 
 const IconsContainer = styled.div`
   display: flex;
   justify-content: space-evenly;
-  margin: 2rem 0 3rem 0;
+  margin-top: 8px;
   width: 80%;
 `;
 
@@ -140,9 +141,10 @@ const StyledInput = styled.input`
   padding: 1rem;
   border: none;
   outline: none;
-  color: #3c354e;
+  color: white;
   font-size: 1rem;
   font-weight: bold;
+  margin-top:8px;
   &:focus {
     display: inline-block;
     box-shadow: 0 0 0 0.2rem #b9abe0;
@@ -160,7 +162,7 @@ const FacebookBackground =
 const InstagramBackground =
   "linear-gradient(to right, #A12AC4 0%, #ED586C 40%, #F0A853 100%)";
 const TwitterBackground = "linear-gradient(to right, #56C1E1 0%, #35A9CE 50%)";
-const LoginPage = ({ user, setUser }) => {
+const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const auth = getAuth(app);
@@ -177,14 +179,12 @@ const LoginPage = ({ user, setUser }) => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const userInfo = userCredential.user;
-        console.log(userInfo);
-        setUser(userInfo);
         Swal.fire("login succuss");
         navigate("/home");
       })
       .catch((error) => {
         const errorMessage = error.message;
-        alert(errorMessage);
+        Swal.fire("Wrong email or Password");
       });
   };
 
@@ -211,10 +211,7 @@ const LoginPage = ({ user, setUser }) => {
         <ButtonContainer>
           <ButtonLogin onClick={handleEvent}>Login</ButtonLogin>
         </ButtonContainer>
-        <LoginWith>
-          <span>Wrong email or Password</span>
-          OR LOGIN WITH
-        </LoginWith>
+        <LoginWith>OR LOGIN WITH</LoginWith>
         <HorizontalRule />
         <IconsContainer>
           <Icon color={FacebookBackground}>

@@ -1,12 +1,25 @@
+import { getAuth, signOut } from "firebase/auth";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import app from "../../Hook/firebaseConfig";
 
 const Navbar = (props) => {
-  const { setSearch, search, user, setUser } = props;
+  const { setSearch, search} = props;
+
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
-  console.log(user);
+  const auth = getAuth(app);
+
+  const userSingOut = async () => {
+    await signOut(auth)
+      .then(() => {
+        console.log("sing out clear");
+        navigate("/");
+      })
+      .catch((error) => console.log(error));
+  };
+
   return (
     <Nav>
       <Logo>
@@ -46,12 +59,12 @@ const Navbar = (props) => {
           </SearchButton>
         </SearchBar>
       </NavMenu>
-      {user ? (
+      {auth?.currentUser?.uid ? (
         <Profile>
           <NameButton onClick={(e) => setOpen(!open)}>
-            {user.displayName.slice(0,2).toUpperCase()}
+            {auth?.currentUser?.displayName}
           </NameButton>
-          {open && <LogoutButton>Logout</LogoutButton>}
+          {open && <LogoutButton onClick={userSingOut}>Logout</LogoutButton>}
         </Profile>
       ) : (
         <LogIn onClick={() => navigate("/login")}>login</LogIn>
@@ -194,7 +207,7 @@ const Profile = styled.div`
   align-items: end;
   /* width: 100%;
   height: 100%; */
-  border:none;
+  border: none;
 `;
 const NameButton = styled.button`
   font-size: 15px;
@@ -206,7 +219,6 @@ const NameButton = styled.button`
   border: none;
   cursor: pointer;
   position: relative;
-  
 `;
 const LogoutButton = styled.button`
   border: none;

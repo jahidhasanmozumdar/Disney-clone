@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Input from "../LoginPage/Input";
 import LogButton from "./Button";
+import Swal from "sweetalert2";
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -9,6 +10,7 @@ import {
   sendEmailVerification,
 } from "firebase/auth";
 import app from "./../../Hook/firebaseConfig";
+import { useNavigate } from "react-router-dom";
 const LoginContainer = styled.div`
   height: 100vh;
   background-image: url("https://www.tetratech.com/en/images/cybersecurity-transformation-pd20-018-960.jpg?blobheader=image/jpeg");
@@ -80,7 +82,7 @@ const InputContainer = styled.div`
 `;
 
 const ButtonContainer = styled.div`
-  margin: 1rem 0 2rem 0;
+  margin: 8px 0;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -99,7 +101,7 @@ const HorizontalRule = styled.hr`
   border: none;
   background: linear-gradient(to right, #14163c 0%, #03217b 79%);
   background-color: #ebd0d0;
-  margin: 1.5rem 0 1rem 0;
+  margin: 8px 0;
   backdrop-filter: blur(25px);
 `;
 const InputSing = styled.input`
@@ -136,16 +138,16 @@ const ButtonsSing = styled.button`
   color: white;
   border-radius: 2rem;
   cursor: pointer;
+  margin-top: 30px;
 `;
 
-const SingUpPage = ({ user, setUser }) => {
+const SingUpPage = () => {
   const [name, setName] = useState();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const navigate = useNavigate();
   const auth = getAuth(app);
   const handleName = (e) => {
-    console.log(e.target.value);
     setName(e.target.value);
   };
   const handleEmail = (e) => {
@@ -166,18 +168,16 @@ const SingUpPage = ({ user, setUser }) => {
       createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           const userInfo = userCredential.user;
-          setUser(userInfo);
           updateName();
           verify();
-          console.log(userInfo);
+          navigate("/home");
+          Swal.fire("signup succuss");
         })
         .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          alert(errorMessage);
+          Swal.fire("signup succuss");
         });
     } else {
-      alert("Fill up the box");
+      Swal.fire("Fill up the box");
       return;
     }
   };
@@ -216,7 +216,7 @@ const SingUpPage = ({ user, setUser }) => {
           />
         </InputContainer>
         <ButtonContainer>
-          <ButtonsSing onClick={handleRegister}>Sing Up</ButtonsSing>
+          <ButtonsSing onClick={handleRegister}>Sign Up</ButtonsSing>
         </ButtonContainer>
         <HorizontalRule />
         <LoginWith>ALREADY A MEMBER?</LoginWith>

@@ -11,7 +11,7 @@ const Container = styled.div`
 
 const Title = styled.h1`
   font-size: 2em;
-  color: red;
+  color: blue;
 `;
 
 const Message = styled.p`
@@ -24,16 +24,18 @@ const Link = styled.a`
   color: blue;
 `;
 
-const NotFoundPage = () => {
-  const [message, setMessage] = useState("The page you are looking for could not be found.");
+const ComingSoonPage = () => {
+  const [message, setMessage] = useState(
+    "We're coming soon! Sign up for our newsletter to be the first to know when we launch."
+  );
 
   return (
     <Container>
-      <Title>404 Page Not Found</Title>
+      <Title>Coming Soon</Title>
       <Message>{message}</Message>
-      <Link to="/home">Go to Home</Link>
+      <Link to="/contact">Sign up for our newsletter</Link>
     </Container>
   );
 };
 
-export default NotFoundPage;
+export default ComingSoonPage;
